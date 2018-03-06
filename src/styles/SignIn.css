@@ -1,0 +1,88 @@
+
+
+
+.log-form {
+    width: 40%;
+    min-width: 320px;
+    max-width: 475px;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+
+    box-shadow: 0px 2px 5px rgba(0,0,0,.25);
+}
+
+@media(max-width: 720px){
+    .log-form{
+        margin-top: 60px;
+    }
+}
+
+.log-form form {
+    display: block;
+    width: 100%;
+    padding: 3.5em;
+}
+
+.log-form h2 {
+    width: 100%;
+    color: white;
+    font-family: 'open sans condensed';
+    font-size: 1.35em;
+    display: block;
+    background: gray;
+    width: 100%;
+    text-transform: uppercase;
+    padding: .75em 1em .75em 1.5em;
+    box-shadow:inset 0px 1px 1px fadeout(white, 95%);
+    border: 1px solid darken;
+    margin: 0;
+    font-weight: 200;
+}
+
+.log-form input {
+    display: block;
+    margin: auto auto;
+    width: 100%;
+    margin-bottom: 2em;
+    padding: .5em 0;
+    border: none;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1.25em;
+    color: #757575;
+}
+
+.log-form form .btn1 {
+    display: inline-block;
+    background: #1fb5bf;
+    border: 1px solid white;
+    padding: .5em 2em;
+    color: white;
+    margin-right: .5em;
+    box-shadow: inset 0px 1px 0px white; 
+    cursor: pointer;
+    float: left;
+}
+.log-form .btn1:hover{
+    background: #1fb5bf
+}
+
+.log-form form > .forgot {
+    color: #1fb5bf;
+    line-height: .5em;
+    position: relative;
+    top: 2.5em;
+    text-decoration: none;
+    font-size: .75em;
+    margin:0;
+    padding: 0;
+    float: right;
+}
+
+

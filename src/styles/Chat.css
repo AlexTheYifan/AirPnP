@@ -1,0 +1,74 @@
+#container {
+    width: 600px;
+    border: 5px solid rgba(117, 117, 117, 0.83);
+    margin: 30px auto;
+}
+
+#chatDisp {
+    height: 500px;
+    width: 580px;
+    margin: 0 auto;
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.51);
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#input {
+    width: 100%;
+    height: 52px;
+    position: relative;
+    margin: 5px 0;
+}
+
+#sendMessage {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    padding: 10px 7px;
+    font-size: 1.5em;
+    width: 15%;
+    right: 3px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#messageInput {
+    display: block;
+    margin: 0 auto;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    position: absolute;
+    z-index: 1;
+    left: 8px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+    padding: 10px;
+}
+
+.message{
+    width: 95%;
+    margin: 0 auto;
+    margin: 10px;
+    padding: 10px;
+    color: black;
+}
+
+.text {
+    float: right;
+    margin: 0;
+    text-align: right;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.11);
+}
+
+.datetime {
+    float: right;
+    margin: 0;
+    padding: 5px;
+    background-color: #ffffff;
+    font-size: .8em;
+}
