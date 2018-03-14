@@ -1,81 +1,46 @@
 import React from "react";
-import {aircrafts} from "../api/mockAircraft"
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as aircraftActions from '../../actions/wishlist_compareAction';
 import { Link } from 'react-router';
 import "../../styles/Header.css";
 
 class HomePage extends React.Component{
-    constructor(props){
-        super(props);
-        var toChange = {};
-        for(var i=0; i<aircrafts.length; i++){
-            var wishlistNCompare = [];
-            if(!aircrafts[i].wishlist){
-                wishlistNCompare.push("fa fa-heart-o");
-            }
-            else{
-                wishlistNCompare.push("fa fa-heart");
-            }
-            if(!aircrafts[i].compare){
-                wishlistNCompare.push("Compare");
-            }
-            else{
-                wishlistNCompare.push("Compare +");
-            }
-            toChange[aircrafts[i].id] = wishlistNCompare;
-        }
-        this.state = {aircrafts: aircrafts, toChange};
+    constructor(props, context){
+        super(props, context);
         this.addToWishlist = this.addToWishlist.bind(this);
         this.addToCompare = this.addToCompare.bind(this);
-        this.updateCompareIcon = this.updateCompareIcon.bind(this);
-        console.log(this.state);
+        this.updateIcon = this.updateIcon.bind(this);
     }
 
-    addToWishlist(id){
-        for(var i=0; i<aircrafts.length; i++){
-            if(aircrafts[i]["id"] == id){
-                aircrafts[i]["wishlist"] = true;
-                var temp = this.state.toChange;
-                temp[aircrafts[i]["id"]] = ["fa fa-heart",temp[aircrafts[i]["id"]][1]];
-                this.setState({toChange: temp});
-                break;
-            }
+    addToWishlist(aircraft){
+        this.props.actions.updateWishlist(aircraft);
+    }
+
+    addToCompare(aircraft){
+        this.props.actions.updateCompare(aircraft);
+    }
+
+    updateIcon(aircraft, iconType){
+        if(iconType == "compare"){
+            if(aircraft.compare) return "Compare +";
+            else return "Compare";
+        }
+        else{
+            if(aircraft.wishlist) return "fa fa-heart";
+            else return "fa fa-heart-o";
         }
     }
-
-    addToCompare(id){
-        for(var i=0; i<aircrafts.length; i++){
-            if(aircrafts[i]["id"] == id){
-                aircrafts[i]["compare"] = true;
-                var temp = this.state.toChange;
-                temp[aircrafts[i]["id"]] = [temp[aircrafts[i]["id"]][0],"Compare +"];
-                this.setState({toChange: temp});
-                break;
-            }
-        }
-    }
-
-    updateCompareIcon(id){
-        for(var i=0; i<aircrafts.length; i++){
-            if(aircrafts[i]["id"] == id){
-                if(aircrafts[i]["compare"] == true){
-                    return "Compare +";
-                }
-                else{
-                    return "Compare";
-                }
-            }
-        }
-    }
-
 
     renderAircrafts(){
+        const aircrafts = this.props.aircrafts;
         return aircrafts.map(aircraft => (
             <div className="aircraft" id={aircraft.id}>
                 <div className="card">
                     <img src={aircraft.img}  alt={aircraft.aircraftName} style={{width: '100%'}} /> 
                     <div className="container"> 
                         <h3 className="aircraftName">{aircraft.aircraftName}</h3> 
-                        <button className="compareButton" onClick={() => this.addToCompare(aircraft.id)}>{this.state.toChange[aircraft.id][1]}</button>  
+                        <button className="compareButton" onClick={() => this.addToCompare(aircraft)}>{this.updateIcon(aircraft,"compare")}</button>  
                         <p className="sellerName">{aircraft.sellerName}</p> 
                         <p className="sellerFrom">{aircraft.sellerFrom}</p> 
                         <span><Link to="chat"><button className = "iconButton"><i className="material-icons" style={{fontSize: 15}}>chat</i></button></Link></span> 
@@ -88,7 +53,7 @@ class HomePage extends React.Component{
                             <li>Prop1 Overhaul Time:   {aircraft.propTime} </li> 
                             <li>#Seats:   {aircraft.seats} </li> 
                         </ul> 
-                        <button className ="iconButton" onClick={() => this.addToWishlist(aircraft.id)}><i className={this.state.toChange[aircraft.id][0]} style={{fontSize: 20}}></i></button> 
+                        <button className ="iconButton" onClick={() => this.addToWishlist(aircraft)}><i className={this.updateIcon(aircraft,"wishlist")} style={{fontSize: 20}}></i></button> 
                         <Link to={{pathname: "purchase", state:{pic: aircraft.img, name: aircraft.aircraftName, price: aircraft.price}}}><button id="purchaseButton">Purchase Now</button></Link>
                     </div> 
                 </div> 
@@ -105,4 +70,16 @@ class HomePage extends React.Component{
     }
 }
 
-export default HomePage;
+function mapStateToProps(state, ownProps){
+    return{
+        aircrafts: state.aircrafts
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        actions: bindActionCreators(aircraftActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

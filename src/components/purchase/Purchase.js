@@ -1,7 +1,6 @@
 import React from "react";
 import "../../styles/Purchase.css"
 import { Link } from 'react-router';
-import {aircrafts} from "../api/mockAircraft"
 
 class Purchase extends React.Component{
     render(){
@@ -66,7 +65,7 @@ class Purchase extends React.Component{
                         
                         </div>
                         <label>
-                        <input type="checkbox" checked="checked" name="sameadr" /> Shipping address same as billing
+                        <input type="checkbox" name="sameadr" /> Shipping address same as billing
                         </label>
                         <Link to="homePage"><button type="submit" class="btn" formaction="../html/index.html">Continue to checkout</button></Link>
                     </form>
